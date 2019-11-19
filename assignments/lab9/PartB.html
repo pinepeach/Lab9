@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 </head>
+
 <body>
     <p>How many buttons do you want to create?</p>
-    <input id = 'text' type = 'text'>
-    <input id = 'buttonfortext' type = 'button' value = 'Go!'>
+    <input id='text' type='text'>
+    <input id='buttonfortext' type='button' value='Go!'>
     <script>
         let browserwidth = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
 
         let browserheight = window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
+            || document.documentElement.clientHeight
+            || document.body.clientHeight;
 
         let ClickArray = [];
         let CorrectOrder = [];
         let array = [];
 
-        function Buttons(color, width, height, order, id){
+        function Buttons(color, width, height, order, id) {
             this.btn = document.createElement('button');
             this.btn.style.backgroundColor = color;
             this.btn.style.width = width;
@@ -27,51 +29,51 @@
             this.order = order;
             this.btn.id = id;
             document.body.appendChild(this.btn);
-            this.setlocation = function(top, left) {
+            this.setlocation = function (top, left) {
                 this.btn.style.position = 'absolute';
                 this.btn.style.top = top;
                 this.btn.style.left = left;
             };
         }
 
-        function RandomMoves(){
+        function RandomMoves() {
             let button = parseInt(document.getElementById('text').value);
-            for (let i=0;i<button;i++){
-                setTimeout(function(){
-                array[i].setlocation(
-                    Math.floor(Math.random() * (browserheight - 60)) + 'px',
-                    Math.floor(Math.random() * (browserwidth - 120)) + 'px'); 
+            for (let i = 0; i < button; i++) {
+                setTimeout(function () {
+                    array[i].setlocation(
+                        Math.floor(Math.random() * (browserheight - 60)) + 'px',
+                        Math.floor(Math.random() * (browserwidth - 120)) + 'px');
                 }, button * 1000);
             }
         }
 
-        function RandomColor(){
+        function RandomColor() {
             let R = Math.floor(Math.random() * 255);
             let B = Math.floor(Math.random() * 255);
             let G = Math.floor(Math.random() * 255);
-            let RGB = 'rgb(' + R + ', ' + G +', '+ B + ')';
+            let RGB = 'rgb(' + R + ', ' + G + ', ' + B + ')';
             return RGB;
         }
-        
-        function Add(){
+
+        function Add() {
             let button = parseInt(document.getElementById('text').value);
             let width = '120px';
             let height = '60px';
-            if (button >= 5 && button <= 100){
-                for (let i=0;i<button;i++){
-                let color = RandomColor();
-                let order = i;
-                id = 'button'+i;
-                let newbutton = new Buttons(color, width, height, order, id);
-                array.push(newbutton);
-                CorrectOrder.push('button'+i);
-                document.getElementById('button'+i).onclick = function (){
-                    ClickArray.push('button'+i)
-                    for (let x=0;x<ClickArray.length;x++){
-                        console.log(ClickArray, CorrectOrder, x)
-                        if (ClickArray[x] !== CorrectOrder[x]){
-                            window.alert('Wrong Order!')
-                            break
+            if (button >= 5 && button <= 100) {
+                for (let i = 0; i < button; i++) {
+                    let color = RandomColor();
+                    let order = i;
+                    id = 'button' + i;
+                    let newbutton = new Buttons(color, width, height, order, id);
+                    array.push(newbutton);
+                    CorrectOrder.push('button' + i);
+                    document.getElementById('button' + i).onclick = function () {
+                        ClickArray.push('button' + i)
+                        for (let x = 0; x < ClickArray.length; x++) {
+                            console.log(ClickArray, CorrectOrder, x)
+                            if (ClickArray[x] !== CorrectOrder[x]) {
+                                window.alert('Wrong Order!')
+                                break
                             }
                         }
                     }
@@ -79,7 +81,7 @@
                 document.getElementById('buttonfortext').onclick = null;
                 RandomMoves();
             }
-            else{
+            else {
                 window.alert('Invalid input. Input has to be from 5-100');
             }
         }
@@ -87,4 +89,5 @@
         document.getElementById('buttonfortext').onclick = Add;
     </script>
 </body>
+
 </html>
